@@ -1,0 +1,23 @@
+# Original Sites checkout, retained locally as a migration backup.
+/friendship-questionnaire/
+/notes/travel/archive/
+/notes/travel/source-url.txt
+
+# Local previews, exports and dependencies.
+artifacts/
+outputs/
+node_modules/
+__pycache__/
+*.py[cod]
+*.zip
+*.tar.gz
+.DS_Store
+Thumbs.db
+
+# Local settings and credentials.
+.env
+.env.*
+!.env.example
+.venv/
+.vscode/
+.idea/

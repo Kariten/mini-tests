@@ -1,0 +1,79 @@
+:root {
+  color-scheme: light;
+  font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  color: #39352f;
+  background: #faf7f2;
+  font-synthesis: none;
+  scroll-behavior: smooth;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 3px solid #a75248; outline-offset: 6px; }
+.site-header, main, footer { width: min(100% - 48px, 1040px); margin-inline: auto; }
+.site-header { min-height: 96px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e8e2d9; gap: 24px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 600; }
+.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #d8cab7; border-radius: 10px; font-size: 27px; font-weight: 400; color: #a75248; }
+.header-link { font-size: 12px; color: #786c5c; padding: 12px 0; }
+.header-link span { margin-left: 12px; }
+.intro { padding-block: 72px 52px; }
+.eyebrow { font-size: 10px; letter-spacing: 2px; color: #8d7c6c; margin: 0 0 22px; }
+h1 { font-size: clamp(36px, 5vw, 54px); line-height: 1.45; letter-spacing: 1px; font-weight: 600; margin: 0 0 22px; }
+h1 span { color: #a75248; }
+.intro-copy { font-size: 14px; line-height: 2; color: #797166; margin: 0; }
+.collection-note { display: flex; align-items: center; gap: 10px; font-size: 11px; color: #8b7b68; margin: 28px 0 0; }
+.collection-note span { font-size: 20px; color: #b58a51; }
+.collection { scroll-margin-top: 24px; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 23px; border-top: 1px solid #e8e2d9; }
+.section-heading h2 { font-size: 18px; font-weight: 600; margin: 0; }
+.section-heading > span { font-size: 11px; color: #8b7b68; }
+.test-card { display: grid; grid-template-columns: 300px 1fr; border: 1px solid #e4dbce; border-radius: 18px; overflow: hidden; background: #fffdf9; transition: border-color .2s, box-shadow .2s; }
+.test-card:hover { border-color: #bc977f; box-shadow: 0 8px 26px #6e503510; }
+.card-art { background: #eee7da; min-height: 320px; padding: 30px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; }
+.card-number { color: #786c5a; font-size: 9px; letter-spacing: 1.6px; }
+.art-arrow { font-size: 100px; line-height: 1; color: #b3775a; position: absolute; top: 39px; right: 22px; transform: rotate(-8deg); }
+.art-title { font-family: Georgia, serif; font-size: 31px; line-height: 1.3; color: #68705b; margin-top: auto; padding-top: 94px; z-index: 1; }
+.color-dots { display: flex; gap: 9px; margin-top: 25px; }
+.color-dots i { width: 12px; height: 12px; border-radius: 50%; background: #ad6335; }
+.color-dots i:nth-child(2) { background: #7c659a; }
+.color-dots i:nth-child(3) { background: #b25478; }
+.color-dots i:nth-child(4) { background: #4b8275; }
+.card-copy { padding: 34px 38px; }
+.card-category { color: #987350; font-size: 10px; letter-spacing: 1px; }
+.card-copy h3 { margin: 15px 0 5px; font-size: 27px; font-weight: 600; letter-spacing: .5px; }
+.card-subtitle { font-size: 13px; color: #756959; margin: 0 0 18px; }
+#travel-description { max-width: 470px; font-size: 12px; color: #797166; line-height: 1.95; margin: 0; }
+.card-tags { padding: 0; margin: 20px 0 25px; display: flex; flex-wrap: wrap; gap: 7px; list-style: none; }
+.card-tags li { font-size: 10px; padding: 6px 9px; background: #f4eee5; color: #7f6c53; border-radius: 5px; }
+.card-action { font-size: 12px; font-weight: 600; color: #a75248; display: inline-flex; align-items: center; gap: 24px; }
+.card-action > span { font-size: 21px; font-weight: 400; }
+.privacy-note { display: flex; gap: 14px; align-items: center; color: #8b7b68; padding-block: 30px 45px; }
+.privacy-note > span { font-size: 25px; color: #ae9271; }
+.privacy-note p { font-size: 11px; line-height: 1.9; margin: 0; }
+footer { border-top: 1px solid #e8e2d9; padding-block: 24px 32px; display: flex; justify-content: space-between; gap: 16px; font-size: 9px; color: #877c6e; letter-spacing: .5px; }
+footer p { margin: 0; }
+@media (max-width: 700px) {
+  .site-header, main, footer { width: calc(100% - 40px); }
+  .site-header { min-height: 76px; }
+  .brand { font-size: 16px; gap: 9px; }
+  .header-link { font-size: 11px; }
+  .intro { padding-block: 44px 36px; }
+  .eyebrow { font-size: 9px; margin-bottom: 18px; }
+  h1 { font-size: 37px; margin-bottom: 18px; }
+  .intro-copy { font-size: 12px; }
+  .collection-note { margin-top: 21px; font-size: 10px; }
+  .test-card { grid-template-columns: 1fr; border-radius: 14px; }
+  .card-art { min-height: 208px; padding: 24px; }
+  .art-title { padding-top: 38px; font-size: 26px; }
+  .art-arrow { font-size: 93px; top: 30px; right: 26px; }
+  .color-dots { margin-top: 17px; }
+  .card-copy { padding: 27px 24px; }
+  .card-copy h3 { font-size: 25px; }
+  .card-tags { gap: 6px; }
+  .privacy-note { padding-block: 25px 34px; }
+  footer { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
