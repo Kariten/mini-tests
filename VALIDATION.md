@@ -2,6 +2,19 @@
 
 日期：2026-10-30（Asia/Hong_Kong）。本文件记录统一目录后的验证；迁移前的旧功能验证原文仅保留在本地备份。
 
+## GitHub 上传与 Pages 首次发布
+
+- 已创建公开仓库 [Kariten/mini-tests](https://github.com/Kariten/mini-tests)，上传 17 个项目文件。页面源码提交：`c91070db84f4c31857619e50c9c33d4035654498`。
+- 原 Sites 项目、隐藏 Git 元数据、旧归档及来源链接、原图、截图、发布包与临时发布脚本均未进入仓库。
+- GitHub Pages 已启用：`main` 分支 `/docs`，`build_type=legacy`，`https_enforced=true`。
+- 首次 [pages build and deployment](https://github.com/Kariten/mini-tests/actions/runs/41066919746) 已 `completed / success`；Pages 和最新构建均为 `built`，构建提交与上传提交一致。
+- 首页：<https://kariten.github.io/mini-tests/>；旅行测试：<https://kariten.github.io/mini-tests/travel/>。
+- 通过 HTTPS 获取八个公开 HTML / CSS / JS / SVG 文件，均返回 200，并与本地源码逐字节一致。原图、维护文档及 Sites 配置的站点路径返回 404。
+- 浏览器从导航进入旅行测试，确认 36 题、4 类，无来源界面。选择第一题 YES 后进度正确，刷新恢复；组合筛选剩余五题。
+- 筛选视图中的结果预览仍含全部 36 题，PNG 为 1400 × 3371；线上实际下载成功。验证答案已撤销，进度归零，未记录 JavaScript 错误或警告。
+- 线上截图与下载样张保存在被忽略的 `artifacts/github-pages-home.png`、`github-pages-travel.png`、`github-pages-result.png`。
+- 维护目标已切换为 GitHub Pages：后续推送 `main` 更新 `/docs`，不再同步或部署旧 ChatGPT Sites。
+
 ## 删除题目来源与原图后的检查
 
 - 已删除网页的「题目来源」按钮、来源弹窗、图库脚本与样式、页脚来源说明，以及导出 PNG 中的来源文字。

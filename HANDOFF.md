@@ -8,8 +8,10 @@
 
 - 仓库名：`mini-tests`；默认分支：`main`。
 - Pages 发布来源：`main` 分支的 `/docs`，无需构建工具或额外的 Actions 配置文件。
-- 预计站点入口：`https://kariten.github.io/mini-tests/`；旅行测试为其下的 `travel/`。
-- 本轮正在执行首次上传与 Pages 部署；实际完成状态、提交和验证结果见 [VALIDATION.md](VALIDATION.md)。
+- 已发布站点入口：`https://kariten.github.io/mini-tests/`；旅行测试为其下的 `travel/`。
+- Git 远端：`https://github.com/Kariten/mini-tests.git`，本地 `main` 跟踪 `origin/main`。
+- 首次上传与 Pages 部署已完成，HTTPS 已启用，线上答题、保存、筛选和 PNG 下载通过。页面源码提交为 `c91070db84f4c31857619e50c9c33d4035654498`；后续维护文档提交不改变 `docs/` 内容。
+- 实际部署和验证记录见 [VALIDATION.md](VALIDATION.md)。
 
 ## 目录约定
 

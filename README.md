@@ -63,13 +63,11 @@ GitHub 仓库的 **Settings → Pages → Build and deployment** 使用以下发
 
 以后在本地修改页面、检查并提交，然后运行 `git push origin main`，GitHub 会自动发布 `/docs` 中的内容。此方案不需要额外构建或 Actions 配置文件。参见 [GitHub 官方发布来源说明](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
 
-仓库与访问地址（本轮部署完成后以验证记录为准）：
+已发布并完成线上验证：
 
-```text
-https://github.com/Kariten/mini-tests
-https://kariten.github.io/mini-tests/
-https://kariten.github.io/mini-tests/travel/
-```
+- [GitHub 仓库](https://github.com/Kariten/mini-tests)
+- [测试导航首页](https://kariten.github.io/mini-tests/)
+- [旅行偏好互检表](https://kariten.github.io/mini-tests/travel/)
 
 原 ChatGPT Sites 部署已停止维护。本项目不包含 Sites 发布配置或同步流程；网站以后统一通过 GitHub Pages 更新。
 
