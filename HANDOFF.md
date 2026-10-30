@@ -15,8 +15,8 @@
 
 ## 目录约定
 
-- `docs/index.html`：测试集合导航首页。
-- `docs/travel/`：旅行偏好互检表，目前包含五个静态文件。
+- `docs/index.html`：MiniTests 导航首页，文档标题、品牌和页脚均为 MiniTests。
+- `docs/travel/`：旅行偏好互检表，目前包含六个静态文件；`share.js` 保存该测试直达网址与静态二维码矩阵。
 - `notes/travel/`：当前说明和完整题目汇总。
 - `scripts/serve.py`：只监听本机，模拟 `/mini-tests/` 子路径。
 - `friendship-questionnaire/`、`notes/travel/archive/`、历史来源链接、`artifacts/` 和 `outputs/`：仅作本地备份或验证，由 Git 忽略，不上传。
@@ -29,7 +29,11 @@
 
 用户要求移除题目来源和原图，已删除页面入口、弹窗、来源元数据、导出图中的来源文字，以及 `docs/travel/originals/`。后续不要恢复这些内容。
 
-存储键保持 `before-we-go-preferences-v1`，题目编号及顺序保持稳定；新测试使用独立存储键。所有资源使用相对路径。旅行页面的 CSS 和两份 JS 使用相同版本参数，变更资源时同步更新版本以避免旧缓存。
+存储键保持 `before-we-go-preferences-v1`，题目编号及顺序保持稳定；新测试使用独立存储键。所有资源使用相对路径。旅行页面的 CSS 和三份 JS 使用相同版本参数，变更资源时同步更新版本以避免旧缓存。
+
+用户要求测试之间独立访问：测试页只允许页内导航，不提供首页、其他测试或基于浏览历史的返回入口。MiniTests 首页用新标签页打开测试，设置 `noopener noreferrer`，避免把首页加入测试标签页的历史。不要用脚本劫持浏览器返回；公开网址手动输入仍可访问，同域部署不构成权限隔离。
+
+结果 PNG 右下角必须带该测试正式网址的二维码及「扫码填写同款」。旅行测试二维码固定指向 `https://kariten.github.io/mini-tests/travel/`，本地导出也使用此正式地址。二维码直接逐格绘制，无外链图片或浏览器第三方依赖；换正式地址时运行 `scripts/generate-qr.py` 重新生成对应 `share.js` 并验证实际 PNG。
 
 ## 后续维护
 

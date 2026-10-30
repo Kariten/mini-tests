@@ -2,6 +2,18 @@
 
 日期：2026-10-30（Asia/Hong_Kong）。本文件记录统一目录后的验证；迁移前的旧功能验证原文仅保留在本地备份。
 
+## 二维码、MiniTests 名称与独立访问（本地验证）
+
+- 根页面 `<title>`、品牌、辅助文字和页脚已改为 MiniTests；入口提示在新标签页打开。桌面及 390 × 844 手机视口检查通过，手机页面 `scrollWidth=375`、视口宽 390，无页面横向溢出。
+- 首页测试入口设置 `target="_blank" rel="noopener noreferrer"`。浏览器实际点击后产生独立测试标签页，首页保留在原标签页；新测试标签页返回操作提示没有上一页历史。
+- 当前测试页唯一链接为 `#`，只返回顶部；没有跨测试、根首页或 `history.back()` 导航。独立访问按页面入口实现，公开 URL 不构成访问权限隔离。
+- 新增测试独立的 `share.js`，二维码为 41 × 41 矩阵（含四模块白边），内容是 `https://kariten.github.io/mini-tests/travel/`。Canvas 使用整像素绘制二维码与「扫码填写同款」，不加载外部图片。
+- 实际从单分类视图中导出 PNG，仍包含全部 36 题；两题已答，其余 34 题标为未答。PNG 为 1400 × 3552，底部二维码与题目、说明文字没有重叠。
+- OpenCV 对浏览器实际下载的整张 PNG 及其 50% 缩小版本分别解码，均精确得到旅行测试直达 URL；已目视检查底部布局与提示文字。
+- JavaScript 语法、资源相对路径和链接检查通过；本轮未记录浏览器 JavaScript 错误或警告。验证填写已撤销，临时视口已恢复。
+- 本地产物：`artifacts/travel-with-qr.png`、`travel-qr-footer.png`、`minitests-home-desktop.png`、`minitests-home-mobile.png`，均被 Git 忽略。
+- 本轮按现有 `main → /docs` 流程发布；线上结果以该提交关联的 GitHub Pages 流程及实际网址复查为准。
+
 ## GitHub 上传与 Pages 首次发布
 
 - 已创建公开仓库 [Kariten/mini-tests](https://github.com/Kariten/mini-tests)，上传 17 个项目文件。页面源码提交：`c91070db84f4c31857619e50c9c33d4035654498`。

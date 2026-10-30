@@ -47,6 +47,7 @@ h1 span { color: #a75248; }
 .card-tags li { font-size: 10px; padding: 6px 9px; background: #f4eee5; color: #7f6c53; border-radius: 5px; }
 .card-action { font-size: 12px; font-weight: 600; color: #a75248; display: inline-flex; align-items: center; gap: 24px; }
 .card-action > span { font-size: 21px; font-weight: 400; }
+.card-action #travel-open-note { font-size: 10px; color: #8b7b68; font-weight: 400; }
 .privacy-note { display: flex; gap: 14px; align-items: center; color: #8b7b68; padding-block: 30px 45px; }
 .privacy-note > span { font-size: 25px; color: #ae9271; }
 .privacy-note p { font-size: 11px; line-height: 1.9; margin: 0; }

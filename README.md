@@ -1,4 +1,4 @@
-# mini-tests · 小测试集合
+# MiniTests
 
 用一个仓库集中管理多个简单测试网页。每个测试都有独立目录，`docs/` 是 GitHub Pages 的完整发布内容。纯 HTML / CSS / JavaScript，无需安装依赖或构建。
 
@@ -18,12 +18,15 @@ mini-tests/
       styles.css
       app.js
       questions.js
+      share.js                   该测试的正式网址和离线二维码矩阵
       favicon.svg
   notes/
     travel/                     测试说明与题目
       README.md
       题目汇总.md
-  scripts/serve.py              仅绑定本机的预览服务
+  scripts/
+    serve.py                    仅绑定本机的预览服务
+    generate-qr.py              维护时生成测试独立的二维码矩阵
   HANDOFF.md
   VALIDATION.md
   friendship-questionnaire/   原 Sites 工作目录，本地保留并由 Git 忽略
@@ -51,6 +54,22 @@ python scripts/serve.py
 
 旅行测试的答案只保存在当前浏览器的 localStorage，不上传服务器。不同域名、浏览器或设备之间不会自动同步。迁往 GitHub Pages 前，可先从旧网站导出结果图。使用方法见 [旅行测试说明](notes/travel/README.md)。当前网页和导出图已移除题目来源展示，发布目录已删除九张原图。
 
+结果 PNG 右下角含该测试正式网址的二维码及「扫码填写同款」。二维码由 Canvas 直接绘制，不调用外部服务；即使在本地填写或导出，扫码也进入正式测试页面。
+
+## 测试独立访问
+
+每个测试独立携带页面、样式、脚本和分享配置，不提供返回 MiniTests 首页、上一测试、下一测试或其他测试的入口。品牌链接只回到本页顶部；弹窗关闭和重填不会触发跨页导航。
+
+MiniTests 首页的测试入口使用新标签页，并设置 `noopener noreferrer`；首页不会成为新测试标签页的返回历史。分享时应发送具体测试的直达网址或结果图上的二维码。
+
+这属于页面导航与数据命名的独立，不是访问权限隔离。GitHub Pages 上的公开网址仍可被手动输入；页面不拦截浏览器返回，也不改写用户原有的浏览历史。同源 localStorage 依靠不同键避免覆盖，不构成安全隔离。
+
+维护二维码时，安装 Python `qrcode` 包后运行以下命令，再验证导出的 PNG 可识别。此包仅用于维护，不是网页运行依赖。
+
+```powershell
+python scripts/generate-qr.py https://kariten.github.io/mini-tests/travel/ docs/travel/share.js
+```
+
 ## GitHub Pages 发布
 
 仓库所属账号：`Kariten`。仓库名：`mini-tests`。本项目只维护 GitHub Pages 部署。
@@ -76,7 +95,8 @@ GitHub 仓库的 **Settings → Pages → Build and deployment** 使用以下发
 1. 在 `docs/<slug>/` 创建独立网页，例如 `docs/another-test/index.html`。目录名用小写英文和连字符。
 2. 将该测试的 JS、CSS、图片放在自己的目录内，使用相对路径，如 `styles.css`、`assets/cover.svg`；避免 `/styles.css` 等域名根路径。
 3. 如需本地保存，为新测试选独立的 localStorage 键；旅行测试使用 `before-we-go-preferences-v1`，应保持稳定。
-4. 在 `docs/index.html` 添加入口卡片，并更新测试数量、本页表格；不必创建另一个仓库。
-5. 将来源和说明放入 `notes/<slug>/`，按 [VALIDATION.md](VALIDATION.md) 检查子路径、手机布局和功能后再发布。
+4. 为结果分享生成指向该测试直达网址的独立二维码，不使用首页或其他测试的地址。
+5. 在 `docs/index.html` 添加带 `target="_blank" rel="noopener noreferrer"` 的入口卡片，并更新测试数量、本页表格；测试页内不要加入返回首页、其他测试链接或 `history.back()`。
+6. 将来源和说明放入 `notes/<slug>/`，按 [VALIDATION.md](VALIDATION.md) 检查子路径、手机布局、二维码和功能后再发布。
 
 目前每个测试独立携带资源，导航页的共享样式只放在 `docs/assets/`。保持各测试可独立使用；需要时再提取公共资源。

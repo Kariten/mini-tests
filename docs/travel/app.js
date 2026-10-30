@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const data = window.QUESTIONNAIRE;
+  const share = window.TEST_SHARE;
   const storageKey = 'before-we-go-preferences-v1';
   const palette = {
     food: { color: '#ad6335', tint: '#fcf0e3', line: '#ecddc9' },
@@ -210,7 +211,9 @@
       for (let n = 0; n < items.length; n += 2) rows.push({ items: items.slice(n, n + 2), height: Math.max(...items.slice(n, n + 2).map(i => i.height)) });
       return { g, rows, height: 106 + rows.reduce((h, row) => h + row.height + 14, 0) + 12 };
     });
-    const resultHeight = 325 + layouts.reduce((h, g) => h + g.height + 25, 0) + 108;
+    const qrScale = 5;
+    const qrSize = share.modules.length * qrScale;
+    const resultHeight = 325 + layouts.reduce((h, g) => h + g.height + 25, 0) + qrSize + 84;
     canvas.height = resultHeight;
     ctx.fillStyle = '#faf7f2'; ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.textBaseline = 'top';
@@ -253,8 +256,20 @@
       }
       y += height + 25;
     }
-    font(ctx, 22, 500); ctx.fillStyle = '#8b7961'; ctx.fillText('偏好不同很正常，提前说好就更从容。', left, y + 5);
-    font(ctx, 16); ctx.fillStyle = '#aa9e8c'; ctx.fillText('仅记录个人偏好 · 供旅伴逐题对照', left, y + 48);
+    font(ctx, 22, 500); ctx.fillStyle = '#8b7961'; ctx.fillText('偏好不同很正常，提前说好就更从容。', left, y + qrSize / 2 - 34);
+    font(ctx, 16); ctx.fillStyle = '#aa9e8c'; ctx.fillText('仅记录个人偏好 · 供旅伴逐题对照', left, y + qrSize / 2 + 9);
+    // 二维码含四模块白边，直接逐格绘制，离线导出也无需加载图片。
+    const qrX = canvas.width - left - qrSize;
+    const qrY = y + 6;
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(qrX, qrY, qrSize, qrSize);
+    ctx.fillStyle = '#292722';
+    share.modules.forEach((row, rowIndex) => {
+      for (let column = 0; column < row.length; column++) {
+        if (row[column] === '1') ctx.fillRect(qrX + column * qrScale, qrY + rowIndex * qrScale, qrScale, qrScale);
+      }
+    });
+    font(ctx, 21, 600); ctx.fillStyle = '#6f5d48'; ctx.textAlign = 'center';
+    ctx.fillText('扫码填写同款', qrX + qrSize / 2, qrY + qrSize + 14); ctx.textAlign = 'left';
     const blob = await new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('blob')), 'image/png'));
     return { blob, answered };
   }
