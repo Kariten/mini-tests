@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#faf7f2">
+  <meta name="theme-color" content="#fff8f2">
   <meta name="description" content="36 道旅行偏好题，分为吃饭、空间共享、体验感、出门玩四大类。填写 YES / NO，一键导出完整偏好结果图，与旅伴一起对照。">
   <title>一起出发前 · 旅行偏好互检表</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=20261030-3">
-  <script src="questions.js?v=20261030-3" defer></script>
-  <script src="share.js?v=20261030-3" defer></script>
-  <script src="app.js?v=20261030-3" defer></script>
+  <link rel="icon" href="favicon.svg?v=20261030-4" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=20261030-4">
+  <script src="questions.js?v=20261030-4" defer></script>
+  <script src="share.js?v=20261030-4" defer></script>
+  <script src="app.js?v=20261030-4" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -20,22 +20,18 @@
   <main class="page-shell">
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
-        <span class="eyebrow"><span></span>TRAVEL BUDDY CHECKLIST</span>
-        <h1 id="page-title">一起出发，<br>先对一下<span class="title-accent">旅行偏好。</span></h1>
-        <p class="hero-description">从吃什么到几点出门，把小习惯提前聊明白。<br class="desktop-break">选好你的 YES / NO，存成一张图，和旅伴对一对。</p>
-        <div class="hero-tags"><span>36 道题</span><i></i><span>4 个类别</span><i></i><span>一张偏好清单</span></div>
+        <h1 id="page-title">我的<span class="title-accent">旅行偏好</span></h1>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="art-orbit"></div><span class="art-star star-one">✳</span><span class="art-star star-two">✦</span>
         <div class="ticket"><span>OUR NEXT ADVENTURE</span><strong>LET’S<br>GO TOGETHER.</strong><div class="ticket-line"></div><small>GOOD COMPANY, GOOD TRIP.</small></div>
-        <svg class="luggage" viewBox="0 0 200 240"><path d="M77 37V18q0-9 9-9h33q9 0 9 9v19" fill="none" stroke="#51473f" stroke-width="8"/><rect x="31" y="35" width="141" height="177" rx="27" fill="#cb7956" stroke="#51473f" stroke-width="3"/><rect x="42" y="44" width="119" height="157" rx="20" fill="#e7a47f"/><path d="M69 67v112M134 67v112" stroke="#b96847" stroke-width="7" stroke-linecap="round"/><rect x="14" y="81" width="73" height="49" rx="7" fill="#faf4db" stroke="#51473f" stroke-width="2" transform="rotate(-12 50 105)"/><path d="m31 104 9 9 21-24" fill="none" stroke="#6c8d72" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="218" r="9" fill="#51473f"/><circle cx="144" cy="218" r="9" fill="#51473f"/><circle cx="126" cy="155" r="26" fill="#ede6f3" stroke="#51473f" stroke-width="2"/><path d="m112 155 10 10 18-20" fill="none" stroke="#817098" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="luggage" viewBox="0 0 200 240"><path d="M77 37V18q0-9 9-9h33q9 0 9 9v19" fill="none" stroke="#51473f" stroke-width="8"/><rect x="31" y="35" width="141" height="177" rx="27" fill="#e76c2e" stroke="#51473f" stroke-width="3"/><rect x="42" y="44" width="119" height="157" rx="20" fill="#ffae68"/><path d="M69 67v112M134 67v112" stroke="#c84c18" stroke-width="7" stroke-linecap="round"/><rect x="14" y="81" width="73" height="49" rx="7" fill="#faf4db" stroke="#51473f" stroke-width="2" transform="rotate(-12 50 105)"/><path d="m31 104 9 9 21-24" fill="none" stroke="#0d9468" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="218" r="9" fill="#51473f"/><circle cx="144" cy="218" r="9" fill="#51473f"/><circle cx="126" cy="155" r="26" fill="#e8d5ff" stroke="#51473f" stroke-width="2"/><path d="m112 155 10 10 18-20" fill="none" stroke="#8250d4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span class="art-label">好旅伴，从了解彼此开始。</span>
       </div>
     </section>
 
     <div class="workspace">
-      <aside class="sidebar">
-        <div class="sidebar-top"><span class="eyebrow">YOUR TRAVEL NOTES</span><h2>我的偏好清单</h2><p>没有标准答案，按真实想法选就好。</p></div>
+      <aside class="sidebar" aria-label="填写设置">
         <label class="name-label" for="respondent">你的称呼 <span>选填</span></label>
         <input id="respondent" maxlength="24" placeholder="这份清单属于……" autocomplete="nickname">
         <div class="progress-heading"><span>填写进度</span><strong id="progress-count">0 <span>/ 36</span></strong></div>

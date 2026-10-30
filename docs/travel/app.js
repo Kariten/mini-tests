@@ -4,10 +4,10 @@
   const share = window.TEST_SHARE;
   const storageKey = 'before-we-go-preferences-v1';
   const palette = {
-    food: { color: '#ad6335', tint: '#fcf0e3', line: '#ecddc9' },
-    space: { color: '#7c659a', tint: '#f0ebf7', line: '#e2d9ed' },
-    experience: { color: '#b25478', tint: '#faeaf0', line: '#efd6e0' },
-    outing: { color: '#4b8275', tint: '#e9f3ee', line: '#d7e5dc' }
+    food: { color: '#b94c00', tint: '#fff0d4', line: '#f0c17a' },
+    space: { color: '#7442c8', tint: '#efe5ff', line: '#cbb2f5' },
+    experience: { color: '#c02b6b', tint: '#ffe3ee', line: '#f1a6c7' },
+    outing: { color: '#087b61', tint: '#dff8ec', line: '#8dd7bc' }
   };
   const icons = {
     all: '<rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/>',
@@ -215,18 +215,18 @@
     const qrSize = share.modules.length * qrScale;
     const resultHeight = 325 + layouts.reduce((h, g) => h + g.height + 25, 0) + qrSize + 84;
     canvas.height = resultHeight;
-    ctx.fillStyle = '#faf7f2'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#fff8f2'; ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.textBaseline = 'top';
-    font(ctx, 19, 600); ctx.fillStyle = '#987c64'; ctx.fillText('BEFORE WE GO  /  一起出发前', left, 49);
-    font(ctx, 49, 650); ctx.fillStyle = '#39352f'; ctx.fillText('我的旅行偏好清单', left, 98);
+    font(ctx, 19, 600); ctx.fillStyle = '#a84b2f'; ctx.fillText('BEFORE WE GO  /  一起出发前', left, 49);
+    font(ctx, 49, 650); ctx.fillStyle = '#352d2b'; ctx.fillText('我的旅行偏好', left, 98);
     const name = state.name.trim() || '未署名';
-    font(ctx, 27, 500); ctx.fillStyle = '#a75248'; ctx.fillText(name, left, 176);
+    font(ctx, 27, 500); ctx.fillStyle = '#cc402b'; ctx.fillText(name, left, 176);
     const answered = Object.keys(state.answers).length;
     const date = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
     font(ctx, 19); ctx.fillStyle = '#8b7d6b'; ctx.fillText(`已填写 ${answered} / 36 题  ·  ${date}`, left, 221);
     ctx.fillStyle = '#8b7d6b'; ctx.fillText('YES = 是    NO = 否    未答 = 尚未选择', left, 257);
-    roundRect(ctx, 1160, 61, 175, 64, 16, '#eee6da');
-    font(ctx, 19, 600); ctx.fillStyle = '#897052'; ctx.textAlign = 'center'; ctx.fillText('36 个小习惯', 1247, 82); ctx.textAlign = 'left';
+    roundRect(ctx, 1160, 61, 175, 64, 16, '#ffe5dc');
+    font(ctx, 19, 600); ctx.fillStyle = '#a73422'; ctx.textAlign = 'center'; ctx.fillText('36 个小习惯', 1247, 82); ctx.textAlign = 'left';
     let y = 325;
     for (const layout of layouts) {
       const { g, rows, height } = layout;
@@ -240,7 +240,7 @@
       for (const row of rows) {
         row.items.forEach((item, column) => {
           const x = left + cardInset + column * (colWidth + gap);
-          roundRect(ctx, x, rowY, colWidth, row.height, 13, '#fffdf9');
+          roundRect(ctx, x, rowY, colWidth, row.height, 13, '#ffffff');
           font(ctx, 16, 600); ctx.fillStyle = p.color; ctx.fillText(String(item.q.number).padStart(2, '0'), x + 16, rowY + 24);
           font(ctx, 23, 500); ctx.fillStyle = '#403a32';
           item.lines.forEach((line, index) => ctx.fillText(line, x + 52, rowY + 20 + index * 35));
@@ -249,7 +249,7 @@
           const answer = state.answers[item.q.id];
           const pillX = x + colWidth - 106, pillY = rowY + (row.height - 43) / 2;
           roundRect(ctx, pillX, pillY, 87, 43, 10, answer === 'yes' ? p.color : answer === 'no' ? p.tint : '#f1ede6', answer === 'no' ? p.line : null);
-          font(ctx, answer ? 21 : 18, 600); ctx.fillStyle = answer === 'yes' ? '#fffdf9' : answer === 'no' ? p.color : '#a29483';
+          font(ctx, answer ? 21 : 18, 600); ctx.fillStyle = answer === 'yes' ? '#ffffff' : answer === 'no' ? p.color : '#a29483';
           ctx.textAlign = 'center'; ctx.fillText(answer === 'yes' ? 'YES' : answer === 'no' ? 'NO' : '未答', pillX + 43.5, pillY + 10); ctx.textAlign = 'left';
         });
         rowY += row.height + 14;
