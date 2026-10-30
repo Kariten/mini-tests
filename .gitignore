@@ -1,7 +1,6 @@
 # Original Sites checkout, retained locally as a migration backup.
 /friendship-questionnaire/
-/notes/travel/archive/
-/notes/travel/source-url.txt
+/local-docs/
 
 # Local previews, exports and dependencies.
 artifacts/
