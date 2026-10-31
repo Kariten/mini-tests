@@ -3,6 +3,7 @@
   const data = window.QUESTIONNAIRE;
   const share = window.TEST_SHARE;
   const storageKey = 'before-we-go-preferences-v1';
+  const answerLabels = { yes: '完全可以', no: '不能接受' };
   const palette = {
     food: { color: '#b94c00', tint: '#fff0d4', line: '#f0c17a' },
     space: { color: '#7442c8', tint: '#efe5ff', line: '#cbb2f5' },
@@ -83,8 +84,8 @@
       <fieldset class="question-copy"><legend id="label-${q.id}">${q.text}</legend>${q.note ? `<p class="question-note" id="note-${q.id}">${q.note}</p>` : ''}
       </fieldset>
       <div class="answer-controls" role="radiogroup" aria-labelledby="label-${q.id}"${q.note ? ` aria-describedby="note-${q.id}"` : ''}>
-        <label class="answer-option"><input type="radio" name="${q.id}" value="yes" aria-label="YES，是"${current === 'yes' ? ' checked' : ''}><span>YES</span></label>
-        <label class="answer-option"><input type="radio" name="${q.id}" value="no" aria-label="NO，否"${current === 'no' ? ' checked' : ''}><span>NO</span></label>
+        <label class="answer-option"><input type="radio" name="${q.id}" value="yes" aria-label="${answerLabels.yes}"${current === 'yes' ? ' checked' : ''}><span>${answerLabels.yes}</span></label>
+        <label class="answer-option"><input type="radio" name="${q.id}" value="no" aria-label="${answerLabels.no}"${current === 'no' ? ' checked' : ''}><span>${answerLabels.no}</span></label>
         <button class="clear-answer" type="button" data-clear="${q.id}" aria-label="清除第 ${q.number} 题的选择" title="清除本题选择"${current ? '' : ' tabindex="-1"'}>×</button>
       </div>
     </div>`;
@@ -200,7 +201,8 @@
     const ctx = canvas.getContext('2d');
     if (!ctx) throw new Error('canvas');
     const width = 1272, colWidth = 605, gap = 22, left = 64, cardInset = 20;
-    const textWidth = colWidth - 52 - 120;
+    const answerWidth = 126;
+    const textWidth = colWidth - 52 - answerWidth - 36;
     const layouts = groups.map(g => {
       const items = g.questions.map(q => {
         font(ctx, 23, 500); const lines = wrap(ctx, q.text, textWidth);
@@ -224,7 +226,7 @@
     const answered = Object.keys(state.answers).length;
     const date = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
     font(ctx, 19); ctx.fillStyle = '#8b7d6b'; ctx.fillText(`已填写 ${answered} / 36 题  ·  ${date}`, left, 221);
-    ctx.fillStyle = '#8b7d6b'; ctx.fillText('YES = 是    NO = 否    未答 = 尚未选择', left, 257);
+    ctx.fillStyle = '#8b7d6b'; ctx.fillText(`${answerLabels.yes} / ${answerLabels.no}    未答 = 尚未选择`, left, 257);
     roundRect(ctx, 1160, 61, 175, 64, 16, '#ffe5dc');
     font(ctx, 19, 600); ctx.fillStyle = '#a73422'; ctx.textAlign = 'center'; ctx.fillText('36 个小习惯', 1247, 82); ctx.textAlign = 'left';
     let y = 325;
@@ -247,10 +249,10 @@
           font(ctx, 18); ctx.fillStyle = '#9a8c7b';
           item.notes.forEach((line, index) => ctx.fillText(line, x + 52, rowY + 26 + item.lines.length * 35 + index * 27));
           const answer = state.answers[item.q.id];
-          const pillX = x + colWidth - 106, pillY = rowY + (row.height - 43) / 2;
-          roundRect(ctx, pillX, pillY, 87, 43, 10, answer === 'yes' ? p.color : answer === 'no' ? p.tint : '#f1ede6', answer === 'no' ? p.line : null);
+          const pillX = x + colWidth - answerWidth - 19, pillY = rowY + (row.height - 43) / 2;
+          roundRect(ctx, pillX, pillY, answerWidth, 43, 10, answer === 'yes' ? p.color : answer === 'no' ? p.tint : '#f1ede6', answer === 'no' ? p.line : null);
           font(ctx, answer ? 21 : 18, 600); ctx.fillStyle = answer === 'yes' ? '#ffffff' : answer === 'no' ? p.color : '#a29483';
-          ctx.textAlign = 'center'; ctx.fillText(answer === 'yes' ? 'YES' : answer === 'no' ? 'NO' : '未答', pillX + 43.5, pillY + 10); ctx.textAlign = 'left';
+          ctx.textAlign = 'center'; ctx.fillText(answerLabels[answer] || '未答', pillX + answerWidth / 2, pillY + 10); ctx.textAlign = 'left';
         });
         rowY += row.height + 14;
       }
