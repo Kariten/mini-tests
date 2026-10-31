@@ -30,8 +30,6 @@
   let category = 'all';
   let onlyUnanswered = false;
   let storageAvailable = true;
-  let previewUrl = '';
-  let previewBlob = null;
   let toastTimer;
   const $ = id => document.getElementById(id);
   try {
@@ -272,8 +270,8 @@
     });
     font(ctx, 21, 600); ctx.fillStyle = '#6f5d48'; ctx.textAlign = 'center';
     ctx.fillText('扫码填写同款', qrX + qrSize / 2, qrY + qrSize + 14); ctx.textAlign = 'left';
-    const blob = await new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('blob')), 'image/png'));
-    return { blob, answered };
+    // 使用真实 PNG 图片供手机浏览器长按保存，预览期间不回收图片地址。
+    return { imageUrl: canvas.toDataURL('image/png'), answered };
   }
   function resultFilename() {
     const safeName = (state.name.trim() || '我的').replace(/[<>:"/\\|?*\u0000-\u001f]/g, '_');
@@ -281,39 +279,31 @@
     const date = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
     return `${safeName}-旅行偏好清单-${date}.png`;
   }
-  function download(blob) {
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url; link.download = resultFilename(); document.body.append(link); link.click(); link.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 60000);
-  }
   function setBusy(busy) {
-    ['export-button', 'preview-button', 'save-preview-button'].forEach(id => { $(id).disabled = busy; });
-    $('export-button').querySelector('span').textContent = busy ? '正在生成图片…' : '一键导出结果图';
+    $('export-button').disabled = busy;
+    $('export-button').setAttribute('aria-busy', String(busy));
+    $('export-button').querySelector('span').textContent = busy ? '正在生成图片…' : '生成结果长图';
   }
-  function showPreview(blob, answered) {
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
-    previewBlob = blob; previewUrl = URL.createObjectURL(blob);
-    $('result-image').src = previewUrl;
-    $('result-description').textContent = `已填写 ${answered} / 36 题${answered < 36 ? `，其余 ${36 - answered} 题标记为「未答」` : '，全部偏好都在这里了'}。图片包含四个类别的全部题目。`;
+  async function showPreview(imageUrl, answered) {
+    $('result-image').src = imageUrl;
+    $('save-preview-link').href = imageUrl;
+    $('save-preview-link').download = resultFilename();
+    await $('result-image').decode();
+    $('result-description').textContent = `已填写 ${answered} / ${questions.length} 题 · ${answered < questions.length ? '未选择的题目已标为「未答」' : '全部偏好都在这里了'}`;
     $('result-dialog').showModal();
+    document.querySelector('.result-image-wrap').scrollTop = 0;
   }
-  async function exportResult(preview) {
+  async function exportResult() {
     setBusy(true);
     try {
       const result = await createResult();
-      if (preview) showPreview(result.blob, result.answered);
-      else { download(result.blob); notify(`结果图已生成，包含全部 36 题${result.answered < 36 ? '，未选择的题目已标为「未答」' : ''}。`); }
+      await showPreview(result.imageUrl, result.answered);
     } catch (error) {
       console.error('结果图生成失败', error);
       notify('图片生成未完成，请重试或换用最新版 Chrome / Edge。');
     } finally { setBusy(false); }
   }
-  $('export-button').addEventListener('click', () => exportResult(false));
-  $('preview-button').addEventListener('click', () => exportResult(true));
-  $('save-preview-button').addEventListener('click', () => {
-    if (previewBlob) { download(previewBlob); notify('结果图片已生成，可在下载列表中查看。'); }
-  });
+  $('export-button').addEventListener('click', exportResult);
   renderQuestions();
   save();
 })();

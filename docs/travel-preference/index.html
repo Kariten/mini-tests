@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#fff8f2">
-  <meta name="description" content="36 道旅行偏好题，分为吃饭、空间共享、体验感、出门玩四大类。选择完全可以或不能接受，一键导出完整偏好结果图，与旅伴一起对照。">
+  <meta name="description" content="36 道旅行偏好题，分为吃饭、空间共享、体验感、出门玩四大类。选择完全可以或不能接受，生成完整结果长图，长按保存后与旅伴一起对照。">
   <title>一起出发前 · 旅行偏好互检表</title>
-  <link rel="icon" href="favicon.svg?v=answers-zh-1" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=answers-zh-1">
-  <script src="questions.js?v=answers-zh-1" defer></script>
-  <script src="share.js?v=answers-zh-1" defer></script>
-  <script src="app.js?v=answers-zh-1" defer></script>
+  <link rel="icon" href="favicon.svg?v=long-image-1" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=long-image-1">
+  <script src="questions.js?v=long-image-1" defer></script>
+  <script src="share.js?v=long-image-1" defer></script>
+  <script src="app.js?v=long-image-1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -51,9 +51,13 @@
   </main>
 
   <footer class="site-footer"><span>BEFORE WE GO · 一起出发前</span><p>仅记录个人偏好，供旅伴逐题对照</p><button class="quiet-button" id="reset-button">清空填写</button></footer>
-  <div class="action-dock"><div class="dock-inner"><div class="dock-status"><span class="status-dot"></span><span id="dock-progress">已填写 0 / 36 题</span><small>准备好，就存一份吧</small></div><div class="dock-actions"><button class="secondary-button" id="preview-button">预览结果</button><button class="primary-button" id="export-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4"/></svg><span>一键导出结果图</span></button></div></div></div>
+  <div class="action-dock"><div class="dock-inner"><div class="dock-status"><span class="status-dot"></span><span id="dock-progress">已填写 0 / 36 题</span><small>准备好，就存一份吧</small></div><div class="dock-actions"><button class="primary-button" id="export-button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg><span>生成结果长图</span></button></div></div></div>
 
-  <dialog id="result-dialog" class="result-dialog" aria-labelledby="result-title"><div class="dialog-header"><div><span class="eyebrow">YOUR PREFERENCES</span><h2 id="result-title">你的旅行偏好结果图</h2><p id="result-description"></p></div><button class="close-button" data-close="result-dialog" aria-label="关闭结果预览">×</button></div><div class="result-image-wrap"><img id="result-image" alt="包含全部 36 道题及所选偏好的结果长图"></div><div class="dialog-actions"><span>手机也可以长按图片保存</span><button class="primary-button" id="save-preview-button">下载 PNG 图片 ↓</button></div></dialog>
+  <dialog id="result-dialog" class="result-dialog" aria-labelledby="result-title" aria-describedby="result-description save-hint">
+    <div class="dialog-header"><div><h2 id="result-title">我的旅行偏好 · 结果长图</h2><p id="result-description"></p></div><button class="close-button" data-close="result-dialog" aria-label="关闭结果预览" autofocus>×</button></div>
+    <div class="result-image-wrap" role="region" aria-label="结果长图，可上下滑动" tabindex="0"><img id="result-image" alt="包含全部 36 道题及所选偏好的结果长图"></div>
+    <div class="dialog-actions"><p class="save-hint" id="save-hint"><strong>长按图片，保存到手机相册</strong><span>上下滑动查看完整结果</span></p><a class="secondary-button desktop-download" id="save-preview-link" download>下载 PNG 图片 ↓</a></div>
+  </dialog>
   <dialog id="reset-dialog" class="reset-dialog" aria-labelledby="reset-title"><button class="close-button" data-close="reset-dialog" aria-label="取消清空">×</button><span class="reset-symbol" aria-hidden="true">↺</span><h2 id="reset-title">重新填写这份清单？</h2><p>称呼和全部答案都会清空。已经下载的结果图不受影响。</p><div class="reset-actions"><button class="secondary-button" data-close="reset-dialog">保留填写</button><button class="primary-button" id="confirm-reset">确认清空</button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <noscript><div class="noscript-note">请启用 JavaScript，以便填写清单和导出结果图。</div></noscript>
