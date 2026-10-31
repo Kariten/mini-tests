@@ -2,7 +2,8 @@
   'use strict';
   const data = window.QUESTIONNAIRE;
   const share = window.TEST_SHARE;
-  const storageKey = 'before-we-go-preferences-v1';
+  // 新版题库在中间插入了题目，使用独立版本避免旧编号答案错位。
+  const storageKey = 'before-we-go-preferences-v2';
   const answerLabels = { yes: '完全可以', no: '不能接受' };
   const palette = {
     food: { color: '#b94c00', tint: '#fff0d4', line: '#f0c17a' },
@@ -32,6 +33,9 @@
   let storageAvailable = true;
   let toastTimer;
   const $ = id => document.getElementById(id);
+  document.querySelectorAll('[data-question-count]').forEach(element => { element.textContent = questions.length; });
+  document.querySelector('meta[name="description"]').content = document.querySelector('meta[name="description"]').content.replace(/^\d+/, questions.length);
+  $('result-image').alt = `包含全部 ${questions.length} 道题及所选偏好的结果长图`;
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) || 'null');
     if (saved && typeof saved === 'object') {
@@ -61,6 +65,7 @@
     $('progress-count').innerHTML = `${answered} <span>/ ${questions.length}</span>`;
     $('progress-fill').style.width = `${answered / questions.length * 100}%`;
     document.querySelector('.progress-track').setAttribute('aria-valuenow', answered);
+    document.querySelector('.progress-track').setAttribute('aria-valuemax', questions.length);
     $('dock-progress').textContent = `已填写 ${answered} / ${questions.length} 题`;
     document.querySelectorAll('.category-button').forEach(button => {
       const id = button.dataset.group;
@@ -223,10 +228,10 @@
     font(ctx, 27, 500); ctx.fillStyle = '#cc402b'; ctx.fillText(name, left, 176);
     const answered = Object.keys(state.answers).length;
     const date = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
-    font(ctx, 19); ctx.fillStyle = '#8b7d6b'; ctx.fillText(`已填写 ${answered} / 36 题  ·  ${date}`, left, 221);
+    font(ctx, 19); ctx.fillStyle = '#8b7d6b'; ctx.fillText(`已填写 ${answered} / ${questions.length} 题  ·  ${date}`, left, 221);
     ctx.fillStyle = '#8b7d6b'; ctx.fillText(`${answerLabels.yes} / ${answerLabels.no}    未答 = 尚未选择`, left, 257);
     roundRect(ctx, 1160, 61, 175, 64, 16, '#ffe5dc');
-    font(ctx, 19, 600); ctx.fillStyle = '#a73422'; ctx.textAlign = 'center'; ctx.fillText('36 个小习惯', 1247, 82); ctx.textAlign = 'left';
+    font(ctx, 19, 600); ctx.fillStyle = '#a73422'; ctx.textAlign = 'center'; ctx.fillText(`${questions.length} 个小习惯`, 1247, 82); ctx.textAlign = 'left';
     let y = 325;
     for (const layout of layouts) {
       const { g, rows, height } = layout;
