@@ -27,7 +27,7 @@ window.QUESTIONNAIRE = {
       { text: '是否有自己的住宿品质要求？', note: '比如只住 300 以上的酒店' }
     ]},
     { id: 'experience', title: '体验感', short: '相处方式', icon: 'experience', description: '照片、情绪与花费，都值得提前聊一聊。', questions: [
-      { text: '发朋友圈合影，是否应该经过对方的确认？' },
+      { text: '发朋友圈合影，必须经过对方的确认？' },
       { text: '玩得不开心，可以挂脸吗？' },
       { text: '可以接受高度 P 图 / 滤镜吗？' },
       { text: '在对方喜欢的景点，愿意花超过 15 分钟拍到满意的照片吗？' },

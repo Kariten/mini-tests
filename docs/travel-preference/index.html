@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#fff8f2">
-  <meta name="description" content="44 道旅行偏好题，分为吃饭、空间共享、体验感、出门玩四大类。选择完全可以或不能接受，生成完整结果长图，长按保存后与旅伴一起对照。">
+  <meta name="description" content="44 道旅行偏好题，分为吃饭、空间共享、体验感、出门玩四大类。选择完全可以、不能接受，或填写详细说明，生成完整结果长图，长按保存后与旅伴一起对照。">
   <title>一起出发前 · 旅行偏好互检表</title>
-  <link rel="icon" href="favicon.svg?v=questions-20261031-1" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=questions-20261031-1">
-  <script src="questions.js?v=questions-20261031-1" defer></script>
-  <script src="share.js?v=questions-20261031-1" defer></script>
-  <script src="app.js?v=questions-20261031-1" defer></script>
+  <link rel="icon" href="favicon.svg?v=explanations-20261031-1" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=explanations-20261031-1">
+  <script src="questions.js?v=explanations-20261031-1" defer></script>
+  <script src="share.js?v=explanations-20261031-1" defer></script>
+  <script src="app.js?v=explanations-20261031-1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -58,7 +58,7 @@
     <div class="result-image-wrap" role="region" aria-label="结果长图，可上下滑动" tabindex="0"><img id="result-image" alt="包含全部 44 道题及所选偏好的结果长图"></div>
     <div class="dialog-actions"><p class="save-hint" id="save-hint"><strong>长按图片，保存到手机相册</strong><span>上下滑动查看完整结果</span></p><a class="secondary-button desktop-download" id="save-preview-link" download>下载 PNG 图片 ↓</a></div>
   </dialog>
-  <dialog id="reset-dialog" class="reset-dialog" aria-labelledby="reset-title"><button class="close-button" data-close="reset-dialog" aria-label="取消清空">×</button><span class="reset-symbol" aria-hidden="true">↺</span><h2 id="reset-title">重新填写这份清单？</h2><p>称呼和全部答案都会清空。已经下载的结果图不受影响。</p><div class="reset-actions"><button class="secondary-button" data-close="reset-dialog">保留填写</button><button class="primary-button" id="confirm-reset">确认清空</button></div></dialog>
+  <dialog id="reset-dialog" class="reset-dialog" aria-labelledby="reset-title"><button class="close-button" data-close="reset-dialog" aria-label="取消清空">×</button><span class="reset-symbol" aria-hidden="true">↺</span><h2 id="reset-title">重新填写这份清单？</h2><p>称呼、全部答案和详细说明都会清空。已经下载的结果图不受影响。</p><div class="reset-actions"><button class="secondary-button" data-close="reset-dialog">保留填写</button><button class="primary-button" id="confirm-reset">确认清空</button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <noscript><div class="noscript-note">请启用 JavaScript，以便填写清单和导出结果图。</div></noscript>
 </body>
